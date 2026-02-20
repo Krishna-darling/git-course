@@ -1,2 +1,0 @@
-When you checkout an old commit, you are in “detached HEAD” state (don’t worry too much).
-Just remember: to return to normal
