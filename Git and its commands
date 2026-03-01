@@ -1,0 +1,252 @@
+# 🚀 Git & GitHub Useful Commands Cheat Sheet
+
+> A quick reference for beginners to understand and interact with Git and GitHub.
+> Prepared for practical project workflows.
+
+---
+
+# 🔧 1. Initial Git Setup
+
+### Configure username
+
+```bash
+git config --global user.name "Your Name"
+```
+
+### Configure email
+
+```bash
+git config --global user.email "your@email.com"
+```
+
+### View global config
+
+```bash
+git config --global --list
+```
+
+---
+
+# 📁 2. Local Repository Commands
+
+### Initialize a repository
+
+```bash
+git init
+```
+
+### Check repository status
+
+```bash
+git status
+```
+
+### View changes in files
+
+```bash
+git diff
+```
+
+### View commit history
+
+```bash
+git log --oneline
+```
+
+---
+
+# 📦 3. Staging & Commit Commands
+
+### Add all files to staging
+
+```bash
+git add .
+```
+
+### Add specific file
+
+```bash
+git add filename
+```
+
+### Commit changes
+
+```bash
+git commit -m "Your message"
+```
+
+### Commit tracked files quickly
+
+```bash
+git commit -am "Your message"
+```
+
+---
+
+# 🌐 4. Remote Repository Commands
+
+### Add remote repository
+
+```bash
+git remote add origin <repo-url>
+```
+
+### View remote repositories
+
+```bash
+git remote -v
+```
+
+### Remove remote
+
+```bash
+git remote remove origin
+```
+
+### Change remote URL
+
+```bash
+git remote set-url origin <new-url>
+```
+
+---
+
+# 🚀 5. Push & Pull Commands
+
+### First push (set upstream)
+
+```bash
+git push -u origin main
+```
+
+### Push changes (after first time)
+
+```bash
+git push
+```
+
+### Pull latest changes
+
+```bash
+git pull origin main
+```
+
+### Clone repository
+
+```bash
+git clone <repo-url>
+```
+
+---
+
+# 🌿 6. Branching Commands
+
+### List branches
+
+```bash
+git branch
+```
+
+### Create new branch
+
+```bash
+git branch branch-name
+```
+
+### Switch branch
+
+```bash
+git switch branch-name
+```
+
+### Create and switch branch
+
+```bash
+git checkout -b branch-name
+```
+
+### Merge branch
+
+```bash
+git merge branch-name
+```
+
+---
+
+# 🗑️ 7. Removing Files
+
+### Remove file completely
+
+```bash
+git rm filename
+```
+
+### Remove folder
+
+```bash
+git rm -r foldername
+```
+
+### Stop tracking but keep locally
+
+```bash
+git rm --cached filename
+```
+
+---
+
+# 🔍 8. Useful Inspection Commands
+
+### Show current branch
+
+```bash
+git branch --show-current
+```
+
+### Show remote details
+
+```bash
+git remote show origin
+```
+
+### Show configuration source
+
+```bash
+git config --list --show-origin
+```
+
+---
+
+# ⚡ 9. Daily Workflow (Recommended)
+
+```bash
+git add .
+git commit -m "update"
+git push
+```
+
+---
+
+# 🎯 10. First Time Project Upload Workflow
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin <repo-url>
+git push -u origin main
+```
+
+---
+
+# 🧠 Pro Tips
+
+* Write meaningful commit messages
+* Use branches for new features
+* Push code regularly
+* Always use .gitignore for sensitive files
+* Keep your GitHub profile active
+
+---
+
+✅ This cheat sheet covers the most important Git commands for students and beginners.
