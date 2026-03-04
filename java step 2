@@ -1,0 +1,185 @@
+Step 2: Creating Database Connection
+Old JDBC vs Modern Spring Boot (DataSource + Connection Pool)
+
+In any database-driven Java application, the second major step is creating a connection between the application and the database. This connection allows the program to send SQL queries and receive results from the database.
+
+However, the way connections are created has evolved over time. Earlier, developers manually created connections using JDBC. In modern Spring Boot applications, connections are managed automatically using DataSource and connection pooling.
+
+1. Step 2 in Traditional JDBC (Old Approach)
+Example Code
+Connection con = DriverManager.getConnection(url, username, password);
+What Happens Internally
+
+When this line executes, the following actions occur:
+
+The Java application contacts the database server.
+
+The database verifies the provided username and password.
+
+A communication channel (connection) is created between the application and the database.
+
+The connection remains active until it is closed manually using con.close().
+
+Key Characteristics
+
+A new connection is created every time the code runs.
+
+Each request requires authentication with the database server.
+
+The developer must manually close the connection.
+
+If the connection is not closed properly, it can cause memory leaks and performance issues.
+
+Problem With This Approach
+
+In small programs, this approach works fine. However, modern applications often have many users accessing the system simultaneously.
+
+Example:
+
+If 1000 users access the application,
+
+The application may try to create 1000 separate database connections.
+
+Creating database connections is expensive in terms of time and system resources. Too many connections can slow down the system or even cause the database to crash.
+
+2. Step 2 in Modern Spring Boot Applications
+
+Modern applications solve this problem using:
+
+DataSource
+
+Connection Pooling (HikariCP)
+
+Spring Boot automatically manages these components, so developers do not need to manually create connections.
+
+What is DataSource?
+
+A DataSource is a Java object responsible for managing database connections.
+
+Instead of creating connections manually, the application asks the DataSource for a connection whenever it needs one.
+
+Responsibilities of DataSource:
+
+Creating database connections
+
+Managing those connections
+
+Providing connections when required
+
+Returning connections back after use
+
+The DataSource is automatically created by Spring Boot using the configuration in the application.properties file.
+
+Example configuration:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.username=root
+spring.datasource.password=1234
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+These properties tell Spring Boot:
+
+Which database to connect to
+
+Which user credentials to use
+
+Which JDBC driver should be loaded
+
+Using this information, Spring Boot creates a DataSource object internally.
+
+What is Connection Pooling?
+
+Connection pooling is a performance optimization technique.
+
+Instead of creating a new connection every time, the system creates a group of reusable connections at application startup.
+
+This group is called a connection pool.
+
+Spring Boot uses HikariCP as the default connection pool.
+
+How Connection Pool Works
+
+When the application starts, a fixed number of database connections are created.
+
+These connections are stored in a pool.
+
+When the application needs a connection, it takes one from the pool.
+
+After the task is completed, the connection is returned to the pool.
+
+The same connection can then be reused by another request.
+
+Example:
+
+If the pool size is 10 connections:
+
+Only 10 connections exist.
+
+Multiple users reuse those connections instead of creating new ones.
+
+Internal Flow in Spring Boot
+
+When a Spring Boot application starts, the following process occurs:
+
+Application Starts
+       ↓
+Spring Boot Reads application.properties
+       ↓
+Creates DataSource Object
+       ↓
+Initializes HikariCP Connection Pool
+       ↓
+Creates Multiple Database Connections
+       ↓
+Connections Stored in Pool
+       ↓
+Application Requests Connection When Needed
+       ↓
+Connection Returned to Pool After Use
+Why Modern Applications Use Connection Pooling
+
+Connection pooling provides several advantages:
+
+Improved Performance
+
+Creating a connection takes time. Reusing connections is much faster.
+
+Better Resource Management
+
+Connections are reused instead of repeatedly created and destroyed.
+
+Scalability
+
+The system can handle many users without creating excessive connections.
+
+Automatic Management
+
+Spring Boot automatically manages connection creation, reuse, and closing.
+
+Real-Life Example
+
+Imagine a swimming pool.
+
+Old Approach (DriverManager)
+
+Every time someone wants to swim:
+
+A new swimming pool is built.
+
+After swimming, the pool is destroyed.
+
+This wastes time and resources.
+
+Modern Approach (Connection Pool)
+
+There is already a large swimming pool.
+
+People enter the pool.
+
+Swim.
+
+Leave.
+
+The same pool is used by the next person.
+
+This is much faster and more efficient.
